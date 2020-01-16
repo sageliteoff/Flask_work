@@ -1,108 +1,104 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sign up page</title>
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'vendor/datepicker/datepicker.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'vendor/bootstrap/css/bootstrap.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'vendor/fontawesome/css/all.min.css') }}">
-    <link rel="stylesheet" href="{{ url_for('static', filename = 'main.css') }}">
-  </head>
-  <body class="bg">
-    <div class="centered-container container">
-      <div class="card" style="min-width:75%;">
-        <div class="card-body" >
-          <h2 class="title">Registration Form</h2>
-          <form method="POST" action="/show">
-            {% if form.errors %}
-              <ul class="errors">
-                {% for errors in form.errors %}
-                  {% for error in errors %}
-                      <li>{{ error }}</li>
-                    {% endfor %}
-                {% endfor %}
-              </ul>
-              {% endif %}
+{% extends 'base.html' %}
 
-            {{form.hidden_tag()}}
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  {{ form.firstname.label }}
-                  {{ form.firstname }}
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  {{ form.lastname.label }}
-                  {{ form.lastname }}
-                </div>
+{% block exra_css %}  
+  <link rel="stylesheet" href="{{ url_for('static', filename = 'vendor/datepicker/datepicker.min.css') }}">
+{% endblock exra_css %}
+
+{% block body_class %} bg {% endblock body_class %}
+
+{% block content %}
+  <div class="centered-container container">
+    <div class="card" style="min-width:75%;">
+      <div class="card-body" >
+        <h2 class="title">Registration Form</h2>
+        <form method="POST" action="/show">
+          {% if form.errors %}
+            <ul class="errors">
+              {% for errors in form.errors %}
+                {% for error in errors %}
+                    <li>{{ error }}</li>
+                  {% endfor %}
+              {% endfor %}
+            </ul>
+            {% endif %}
+
+          {{form.hidden_tag()}}
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                {{ form.firstname.label }}
+                {{ form.firstname }}
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  {{ form.birthday.label }}
-                    <div class="input-group">
-                      {{ form.birthday }}
-                      <div class="input-group-append">
-                        <span class="input-group-text far fa-calendar" id="basic-addon1"></span>
-                      </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                {{ form.lastname.label }}
+                {{ form.lastname }}
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                {{ form.birthday.label }}
+                  <div class="input-group">
+                    {{ form.birthday }}
+                    <div class="input-group-append">
+                      <span class="input-group-text far fa-calendar" id="basic-addon1"></span>
                     </div>
                   </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <label class="label">Gender</label>
-                  <div>
-                    {% for subfield in form.gender %}
-                      <span>{{ subfield(size=18) }}</span>
-                      <span>{{ subfield.label }}</span>
-                    {% endfor %}
-                  </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                <label class="label">Gender</label>
+                <div>
+                  {% for subfield in form.gender %}
+                    <span>{{ subfield(size=18) }}</span>
+                    <span>{{ subfield.label }}</span>
+                  {% endfor %}
                 </div>
               </div>
             </div>
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  {{ form.email.label }}
-                  {{ form.email }}
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  {{ form.phonenumber.label }}
-                  {{ form.phonenumber }}
-                </div>
+          </div>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="form-group">
+                {{ form.email.label }}
+                {{ form.email }}
               </div>
             </div>
-            <div class="row">
-              <div class="col">
-                <div class="form-group">
-                  {{ form.subject.label }}
-                  {{form.subject}}
-                </div>
+            <div class="col-md-6">
+              <div class="form-group">
+                {{ form.phonenumber.label }}
+                {{ form.phonenumber }}
               </div>
             </div>
-            <div class="row">
-              <div class="col">
-                {{form.submit}}
+          </div>
+          <div class="row">
+            <div class="col">
+              <div class="form-group">
+                {{ form.subject.label }}
+                {{form.subject}}
               </div>
             </div>
-          </form>
-        </div>
+          </div>
+          <div class="row">
+            <div class="col">
+              {{form.submit}}
+            </div>
+          </div>
+        </form>
       </div>
     </div>
+  </div>
+{% endblock content %}
+   
+{% block extra_scripts %}
+<script type="text/javascript" src="{{ url_for('static', filename = 'vendor/datepicker/datepicker.min.js') }}"></script>
 
-
-    <script type="text/javascript" src={{ url_for('static', filename = 'vendor/jquery.js') }}></script>
-    <script type="text/javascript" src="{{ url_for('static', filename = 'vendor/datepicker/datepicker.min.js') }}"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename = 'vendor/bootstrap/js/bootstrap.min.js') }}"></script>
-
-    <script type="text/javascript">
-      const picker = datepicker("#bday")
-    </script>
-  </body>
-</html>
+<script type="text/javascript">
+  const picker = datepicker("#bday")
+</script>
+{% endblock extra_scripts %}
+    

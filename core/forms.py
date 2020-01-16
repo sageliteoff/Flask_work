@@ -39,3 +39,8 @@ class SignUpForm(FlaskForm):
                     ("subject 2", "subject 2")],
                     render_kw = {"class" : "form-control form-input-style" })
     submit = SubmitField("Submit", render_kw = {"class" : "btn btn-primary px-5" })
+
+
+class SearchBarForm(FlaskForm):
+    searchbar = StringField("Search", validators=[DataRequired("This Field is required")])
+    submit = SubmitField("Submit")
