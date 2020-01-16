@@ -43,4 +43,4 @@ class SignUpForm(FlaskForm):
 
 class SearchBarForm(FlaskForm):
     searchbar = StringField("Search", validators=[DataRequired("This Field is required")])
-    submit = SubmitField("Submit")
+    submit = SubmitField("Search")
